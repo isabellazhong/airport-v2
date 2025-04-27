@@ -1,22 +1,26 @@
 // sorts with o(nlogn) time
-function merge_sort(input, type_sort){
-    var mid_point = Math.round(input.length/2);
-    let right = merge_sort(input.slice(0, mid_point));
-    let left = merge_sort(input.slice(mid_point, 0));
+function merge_sort(input){
 
-    let merged = merge(right, left, type_sort)
+    if(input.length == 1 | input.length == 0){
+        return input
+    }
+    var mid_point = Math.round(input.length/2);
+    let right = merge_sort(input.slice(mid_point));
+    let left = merge_sort(input.slice(0, mid_point));
+
+    let merged = merge(right, left)
 
     return merged
 }
 
-function merge(right, left, type_sort){
+function merge(right, left){
     var i = 0;
     var j = 0;
     let merged = []
 
-    while(i<right.length && j <left.length){
-        if(type_sort(right) <= type_sort(left)){
-            merged.push(right(i));
+    while(i < right.length && j < left.length){
+        if(right[i] <= left[j]){
+            merged.push(right[i]);
             i += 1
         }else{
             merged.push(left[j]);
@@ -24,6 +28,10 @@ function merge(right, left, type_sort){
         }
     }
 
-    merged.concat(right.slice(i, length(right)));
-    merged.concat(left.slice(i, length(left)));
+    merged = merged.concat(right.slice(i, right.length));
+    merged = merged.concat(left.slice(j, left.length));
+
+    return merged
 }
+
+console.log(merge_sort([1,5,7,2,1,0,9]))

@@ -69,11 +69,12 @@ function search(map, input){
    if(input in map){
         return input
    }else{
-        //TODO: make function to sort keys 
-        return recc_search(map, 5, map.keys())
+        let sorted_keys = merge_sort(Object.keys(map))
+        return recc_search(map, 5, sorted_keys)
    }
 }      
 
+//TODO integrate with input 
 function main_search(){
 
 }
